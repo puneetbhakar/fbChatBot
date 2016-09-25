@@ -132,26 +132,12 @@ function sendStartMessage(recipientId,messageText) {
     recipient:{
       id: recipientId
     },
-    message:{
-      text: "Pick a color:",
-      quick_replies:[
-        {
-          content_type: "text",
-          title: "Red",
-          payload: "Payload for first bubble"
-        },
-        {
-          content_type: "text",
-          title: "Blue",
-          payload: "Payload for second bubble"
-        }
-      ]
-    },
     message: {
       text: messageText
     }
   }
   callSendAPI(messageData);
+  sendQuickMessage(recipientId);
 }
 
 
