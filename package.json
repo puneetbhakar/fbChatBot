@@ -13,6 +13,11 @@
   "author": "puneet-bhakar",
   "license": "MIT",
   "engines": {
-    "node": "4.4.7"
+    "node": "4.5.0"
   },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "request": "^2.75.0"
+  }
 }
