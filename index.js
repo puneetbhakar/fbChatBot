@@ -118,7 +118,7 @@ function receivedPostback(event) {
 
   switch (payload) {
     case 'GET_STARTED':
-      sendTextMessage(senderID, "Hey There! How are you?");
+      sendStartMessage(senderID, "Hey There! How are you?");
       break;
 
     default:
