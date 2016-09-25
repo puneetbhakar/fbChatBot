@@ -86,6 +86,10 @@ app.get('/webhook', function (req, res) {
         sendReceiptMessage(senderID);
         break;
 
+      case 'quick':
+        sendQuickMessage(senderID);
+        break;
+
       default:
         sendTextMessage(senderID, messageText);
     }
@@ -155,6 +159,30 @@ function callSendAPI(messageData) {
       console.error(error);
     }
   });
+}
+
+function sendQuickMessage(recipientId){
+  var messageData = {
+    recipient:{
+      id: recipientId
+    },
+    message:{
+      text: "Pick a color:",
+      quick_replies:[
+        {
+          content_type: "text",
+          title: "Red",
+          payload: sendTextMessage(senderID, "You choosed Red")
+        },
+        {
+          content_type: "text",
+          title: "Blue",
+          payload: sendTextMessage(senderID, "You choosed Blue")
+        }
+      ]
+    }
+  }
+  callSendAPI(messageData);
 }
 
 function sendGenericMessage(recipientId) {
