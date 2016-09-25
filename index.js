@@ -118,26 +118,15 @@ function receivedPostback(event) {
 
   switch (payload) {
     case 'GET_STARTED':
-      sendStartMessage(senderID, "Hey There! How are you?");
+      sendTextMessage(senderID, "Hey There! I wil tell you about Puneet?");
+      sendTextMessage(senderID, "So what do you want to know!");
+      startingQuickMessage(senderID)
       break;
 
     default:
       sendTextMessage(senderID, "Postback called");
   }
 
-}
-
-function sendStartMessage(recipientId,messageText) {
-  var messageData = {
-    recipient:{
-      id: recipientId
-    },
-    message: {
-      text: messageText
-    }
-  }
-  callSendAPI(messageData);
-  sendQuickMessage(recipientId);
 }
 
 
@@ -154,7 +143,29 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-
+function startingQuickMessage(recipientId){
+  var messageData = {
+    recipient:{
+      id: recipientId
+    },
+    message:{
+      text: "Pick a color:",
+      quick_replies:[
+        {
+          content_type: "text",
+          title: "Red",
+          payload: "Payload for first bubble"
+        },
+        {
+          content_type: "text",
+          title: "Blue",
+          payload: "Payload for second bubble"
+        }
+      ]
+    }
+  }
+  callSendAPI(messageData);
+}
 
 
 
