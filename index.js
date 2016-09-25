@@ -172,12 +172,12 @@ function sendQuickMessage(recipientId){
         {
           content_type: "text",
           title: "Red",
-          payload: sendTextMessage(recipientId, "You choosed Red")
+          payload: "Payload for first bubble"
         },
         {
           content_type: "text",
           title: "Blue",
-          payload: sendTextMessage(recipientId, "You choosed Blue")
+          payload: "Payload for second bubble"
         }
       ]
     }
