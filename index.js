@@ -13,6 +13,9 @@ app.get('/webhook', function (req, res) {
    }
  });
 
+
+
+
  app.post('/webhook', function (req, res) {
    var data = req.body;
 
@@ -47,6 +50,10 @@ app.get('/webhook', function (req, res) {
      res.sendStatus(200);
    }
  });
+
+
+
+
 
  function receivedMessage(event) {
   var senderID = event.sender.id;
@@ -86,6 +93,10 @@ app.get('/webhook', function (req, res) {
   }
 }
 
+
+
+
+
 function receivedDeliveryConfirmation(event){
   console.log(event)
 }
@@ -116,6 +127,33 @@ function receivedPostback(event) {
 
 }
 
+function sendStartMessage(recipientId,messageText) {
+  var messageData = {
+    recipient:{
+      id: recipientId
+    },
+    message:{
+      text: "Pick a color:",
+      quick_replies:[
+        {
+          content_type: "text",
+          title: "Red",
+          payload: "Payload for first bubble"
+        },
+        {
+          content_type: "text",
+          title: "Blue",
+          payload: "Payload for second bubble"
+        }
+      ]
+    },
+    message: {
+      text: messageText
+    }
+  }
+  callSendAPI(messageData);
+}
+
 
 function sendTextMessage(recipientId, messageText) {
   var messageData = {
@@ -130,11 +168,23 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+
+
+
+
+
+
 function sendImageMessage(senderID){
   console.log(senderID)
 }
 
+
+
+
 var PAGE_ACCESS_TOKEN = "EAAQEZCZB5vGtwBAEdIxexyXgy2BM9owBVPMR2VTi0nogCi8ZClu3VPsKGLRTITvZA9o1rvSJtr98czCP0fSFjsATR4zcCNZByudWTZCWZCfGkCfKy08ZAH6gD5ccqagETvTTV0HSrNOwZAclCyZBH5IgBaLhZAw6XL5B0xSxOoT3Fg9kgZDZD"
+
+
+
 
 function callSendAPI(messageData) {
   request({
@@ -157,6 +207,8 @@ function callSendAPI(messageData) {
     }
   });
 }
+
+
 
 function sendQuickMessage(recipientId){
   var messageData = {
@@ -181,6 +233,9 @@ function sendQuickMessage(recipientId){
   }
   callSendAPI(messageData);
 }
+
+
+
 
 function sendGenericMessage(recipientId) {
   var messageData = {
