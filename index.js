@@ -151,12 +151,12 @@ function startingQuickMessage(recipientId, message){
       quick_replies:[
         {
           content_type: "text",
-          title: "tell me about his academics",
+          title: "about his academics?",
           payload: "Payload for first bubble"
         },
         {
           content_type: "text",
-          title: "What is he doing right now?",
+          title: "what's he doing now?",
           payload: "Payload for second bubble"
         },
         {
