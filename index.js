@@ -70,20 +70,8 @@ app.get('/webhook', function (req, res) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
-      case 'image':
-        sendImageMessage(senderID);
-        break;
-
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
-
       case 'generic':
         sendGenericMessage(senderID);
-        break;
-
-      case 'receipt':
-        sendReceiptMessage(senderID);
         break;
 
       case 'quick':
@@ -116,7 +104,16 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+
+  switch (payload) {
+    case 'GET_STARTED':
+      sendTextMessage(senderID, "Hey There! How are you?");
+      break;
+
+    default:
+      sendTextMessage(senderID, "Postback called");
+  }
+
 }
 
 
