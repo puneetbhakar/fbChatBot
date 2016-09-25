@@ -118,9 +118,7 @@ function receivedPostback(event) {
 
   switch (payload) {
     case 'GET_STARTED':
-      sendTextMessage(senderID, "Hey There! I wil tell you about Puneet?");
-      sendTextMessage(senderID, "So what do you want to know!");
-      startingQuickMessage(senderID)
+      startingQuickMessage(senderID,"hey there!, so what do you want to know about Puneet?")
       break;
 
     default:
@@ -143,22 +141,27 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-function startingQuickMessage(recipientId){
+function startingQuickMessage(recipientId, message){
   var messageData = {
     recipient:{
       id: recipientId
     },
     message:{
-      text: "Pick a color:",
+      text: message,
       quick_replies:[
         {
           content_type: "text",
-          title: "Red",
+          title: "tell me about his academics",
           payload: "Payload for first bubble"
         },
         {
           content_type: "text",
-          title: "Blue",
+          title: "What is he doing right now?",
+          payload: "Payload for second bubble"
+        },
+        {
+          content_type: "text",
+          title: "where is he now?",
           payload: "Payload for second bubble"
         }
       ]
