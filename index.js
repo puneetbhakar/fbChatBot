@@ -75,7 +75,7 @@ app.get('/webhook', function (req, res) {
   var messageId = message.mid;
 
   // You may get a text or attachment but not both
-  var messageText = message.text.toLoweCase();
+  var messageText = message.text.toLowerCase();
   var messageAttachments = message.attachments;
 
   if (messageText) {
