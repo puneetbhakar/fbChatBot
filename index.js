@@ -131,15 +131,12 @@ function receivedPostback(event) {
   // let them know it was successful
 
   switch (payload) {
-    case 'GET_STARTED':
-      startingQuickMessage(senderID,"Hi there! so what do you want to know about Puneet?")
-      break;
-    case 'ACADEMICS':
-      academicsSendMessage(senderID,"He graudated "🎓" from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
-      break;
-    case 'ACADEMICS':
-      academicsSendMessage(senderID,"He graudated "🎓" from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
-      break;
+      case 'GET_STARTED':
+        startingQuickMessage(senderID,"Hi there! so what do you want to know about Puneet?")
+        break;
+      case 'ACADEMICS':
+        academicsSendMessage(senderID,"He graudated "🎓" from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
+        break;
 
       default:
       sendTextMessage(senderID, "Postback called");
