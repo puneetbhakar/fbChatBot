@@ -135,7 +135,7 @@ function receivedPostback(event) {
         startingQuickMessage(senderID,"Hi there! so what do you want to know about Puneet?")
         break;
       case 'ACADEMICS':
-        academicsSendMessage(senderID,"He graudated 🎓 from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
+        academicsSendMessage(senderID,"He graudated from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
         break;
 
       default:
