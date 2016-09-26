@@ -52,6 +52,13 @@ app.get('/webhook', function (req, res) {
  });
 
 
+ function receivedDeliveryConfirmation(event){
+   console.log(event)
+ }
+
+ function receivedAuthentication(event){
+   console.log(event)
+ }
 
 
 
@@ -68,7 +75,7 @@ app.get('/webhook', function (req, res) {
   var messageId = message.mid;
 
   // You may get a text or attachment but not both
-  var messageText = message.text;
+  var messageText = message.text.toLoweCase();
   var messageAttachments = message.attachments;
 
   if (messageText) {
@@ -77,10 +84,21 @@ app.get('/webhook', function (req, res) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
-      case 'generic':
-        sendGenericMessage(senderID);
+      case 'hey':
+        sendTextMessage(senderID, "Heyyy!");
         break;
-
+      case 'hi':
+        sendTextMessage(senderID, "Hi!");
+        break;
+      case 'hello':
+        sendTextMessage(senderID, "Helloo");
+        break;
+      case 'cool':
+        sendTextMessage(senderID, "thanks");
+        break;
+      case 'bye':
+        sendTextMessage(senderID, "Bye! take care");
+        break;
       case 'quick':
         sendQuickMessage(senderID);
         break;
@@ -96,10 +114,6 @@ app.get('/webhook', function (req, res) {
 
 
 
-
-function receivedDeliveryConfirmation(event){
-  console.log(event)
-}
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
@@ -118,10 +132,16 @@ function receivedPostback(event) {
 
   switch (payload) {
     case 'GET_STARTED':
-      startingQuickMessage(senderID,"hey there!, so what do you want to know about Puneet?")
+      startingQuickMessage(senderID,"Hi there! so what do you want to know about Puneet?")
+      break;
+    case 'ACADEMICS':
+      academicsSendMessage(senderID,"He graudated "🎓" from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
+      break;
+    case 'ACADEMICS':
+      academicsSendMessage(senderID,"He graudated "🎓" from IIT Delhi in 2016 with an engineering degree in Textile Technologies.")
       break;
 
-    default:
+      default:
       sendTextMessage(senderID, "Postback called");
   }
 
@@ -152,17 +172,17 @@ function startingQuickMessage(recipientId, message){
         {
           content_type: "text",
           title: "about his academics?",
-          payload: "Payload for first bubble"
+          payload: "ACADEMICS"
         },
         {
           content_type: "text",
           title: "what's he doing now?",
-          payload: "Payload for second bubble"
+          payload: "DOING_NOW"
         },
         {
           content_type: "text",
           title: "where is he now?",
-          payload: "Payload for second bubble"
+          payload: "LOCATION"
         }
       ]
     }
@@ -171,19 +191,51 @@ function startingQuickMessage(recipientId, message){
 }
 
 
+function academicsSendMessage(recipientId, messageText){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText
+    }
+  };
 
+    callSendAPI(messageData);
+    academicsQuickReplies(recipientId);
+}
 
-
-function sendImageMessage(senderID){
-  console.log(senderID)
+function academicsQuickReplies(recipientId){
+  var messageData = {
+    recipient:{
+      id: recipientId
+    },
+    message:{
+      text: message,
+      quick_replies:[
+        {
+          content_type: "text",
+          title: "about his academics?",
+          payload: "ACADEMICS"
+        },
+        {
+          content_type: "text",
+          title: "what's he doing now?",
+          payload: "DOING_NOW"
+        },
+        {
+          content_type: "text",
+          title: "where is he now?",
+          payload: "LOCATION"
+        }
+      ]
+    }
+  }
+  callSendAPI(messageData);
 }
 
 
-
-
 var PAGE_ACCESS_TOKEN = "EAAQEZCZB5vGtwBAEdIxexyXgy2BM9owBVPMR2VTi0nogCi8ZClu3VPsKGLRTITvZA9o1rvSJtr98czCP0fSFjsATR4zcCNZByudWTZCWZCfGkCfKy08ZAH6gD5ccqagETvTTV0HSrNOwZAclCyZBH5IgBaLhZAw6XL5B0xSxOoT3Fg9kgZDZD"
-
-
 
 
 function callSendAPI(messageData) {
